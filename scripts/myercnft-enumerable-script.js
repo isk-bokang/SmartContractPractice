@@ -4,21 +4,18 @@ async function main() {
     const [deployer] = await ethers.getSigners();
     console.log( "Deployer Address : " , deployer.address)
     
-    const MyNFT = await ethers.getContractFactory("MyEthNFT");
+    const MyNFT = await ethers.getContractFactory("MyErcNFT_Enumerable");
 
     const myNft = await MyNFT.deploy();
-    console.log("NFT Balance in This Account: ", await myNft.balanceOf(deployer.address))
     var tokenId = await myNft.addNFTData(deployer.address, "../resource/itemResource.json")    
-    var tokenId2 = await myNft.addNFTData(deployer.address, "../resource/itemResource.json") 
-
-
-    await myNft.deployed();
-    //await myNft2.deployed();
+    var tokenId2 = await myNft.addNFTData(deployer.address, "../resource/itemResource.json")
 
     console.log("NFT Balance in This Account: ", await myNft.balanceOf(deployer.address))
-    console.log("NFT1 address: ", await myNft._tokenIds)
-    console.log("Total Amount : ", await myNft.totalSupply())
+    console.log("NFT address: ", myNft.address)
 
+    console.log("NFT Token ID: ", tokenId)
+    console.log("NFT Token ID2: ", tokenId2)
+    console.log("Total Amount : ", await myNft.totalSupply())
 
 }
 
